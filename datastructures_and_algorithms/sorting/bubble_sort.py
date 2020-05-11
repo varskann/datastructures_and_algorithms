@@ -4,45 +4,41 @@ __data__ = "06-May-2020"
 import inspect
 
 def sort(array):
-    # """Sort array using Selection sort
+    """Sort array using Bubble sort
 
-    # Logic: 
-    #     Select n-smallest element and place it in the nth block of array
-    # Intuition: 
-    #     Assume a card deck in your hand down, say 1 to 13
-    #         - You scan through whole deck and SELECT smallest card, i.e., 1 
-    #         - Put it at the very first position 
-    #         - Scan through remaining deck and SELECT second smallest card, i.e., 2
-    #         - Put it at the second position
-    # Time Complexity:
-    #     Best case: O(n2)
-    #     Average case: O(n2)
-    #     Worst case: O(n2)
-    # Inplace: 
-    #     Sorts entries in same array - True
-    # Stable:
-    #     Equal elements will maintain order as in input array - True 
+    Logic: 
+        Keep swapping the adjacent elements of the arary
+    Intuition: 
+        As the name suggests, it moves by moving lightest(smallest) bubble to top
+            - Keep scanning from bottom of bubbles to the current bubble
+            - To keep bringing the smalles bubble to top
+                - Keep comparing the bubble at bottom with the one on just top of it
+                - If bottom bubble is lighter move it up / swap
+                - Else, lighter bubble stays on top and keeps moving upwards
+    Time Complexity:
+        Best case: O(n2)
+        Average case: O(n2)
+        Worst case: O(n2)
+    Inplace: 
+        Sorts entries in same array - True
+    Stable:
+        Equal elements will maintain order as in input array - True 
     
-    # Arguments:
-    #     array {list} -- input array to be sorted
+    Arguments:
+        array {list} -- input array to be sorted
 
-    # Returns:
-    #     list -- sorted output array
-    # """
+    Returns:
+        list -- sorted output array
+    """
 
-    # for i in range(0, len(array)):
-    #     _min_element = array[i]
-    #     _min_idx = i
-    #     for j in range(i+1, len(array)):
-    #         if array[j] < _min_element:
-    #             _min_element = array[j]
-    #             _min_idx = j
-                        
-    #     ## Place the selected element at appropriate position
-    #     _temp = array[_min_idx]
-    #     array[_min_idx] = array[i]
-    #     array[i] = _temp
-    
+    for i in range(0, len(array)):
+        for j in range(len(array)-1, i, -1):
+            if array[j] < array[j-1]:
+                ## Move the lighter bubble up
+                _temp = array[j]
+                array[j] = array[j-1]
+                array[j-1] = _temp
+            
     return array
     
 if __name__ == "__main__":
