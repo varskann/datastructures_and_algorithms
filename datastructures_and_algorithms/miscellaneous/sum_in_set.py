@@ -1,5 +1,5 @@
 __author__ = "Kanishk Varshney"
-__data__ = "06-May-2020"
+__data__ = "04-Oct-2020"
 
 import inspect
 from datastructures_and_algorithms.sorting.merge_sort import sort as merge_sort
@@ -21,11 +21,15 @@ def binary_search(array, x):
         else:
             return False
     else:
-        _mid = len(array) // 2
-        if array[_mid] == x:
+        _mid = int(len(array) / 2)
+        _mid_element = array[_mid]
+        if _mid_element == x:
             return True
         else:
-            return binary_search(array[:_mid], array[_mid+1:])
+            if _mid_element < x:
+                return binary_search(array[_mid+1:], x)
+            else:
+                return binary_search(array[:_mid], x)
         
     return _mid
         
@@ -42,8 +46,25 @@ def sum_in_set(array, x):
         _x1 = _sorted_array[i]
         if binary_search(_sorted_array[i+1:], x-_x1):
             return True
-    
+
+    return False
+
+def sum_in_set_linear(array, x):
+    """Search if any two elements in array sum exactly x
+
+    We will maintain a set, whose lookup will be O(1), to keep track of traversed elements
+    Args:
+        array ([type]): [description]
+        x ([type]): [description]
+    """
+
+    s = set() 
+    for i in range(len(array)):
+        diff = x - array[i]
+        if diff in s:
+            return True
+        s.add(array[i])
     return False
     
 if __name__ == "__main__":
-    print(sum_in_set([2,3,6,5,4,1,-1], 12)) 
+    print(sum_in_set([2,3,6,5,4,1,-1], 9)) 
